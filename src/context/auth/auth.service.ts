@@ -9,6 +9,7 @@ import { JwtService } from '@nestjs/jwt';
 import { RegisterDto, loginDto, RegisterPresenter } from './auth.types';
 
 import { UserCredentialsEntity } from './entities/user-credentials.entity';
+import { AuthCredentialsError, AuthRegisterError } from './errors/auth.error';
 
 
 
@@ -23,7 +24,11 @@ export class authService {
   async registerUser(registerDTO: RegisterDto) {
     const emailExists = await this.authRepo.findCredentialByEmail(registerDTO.email);
     if (emailExists) {
-      throw new Error('Email already in use');
+      console.log('Email already in use');
+      throw new AuthRegisterError(
+        { referralCode: ['Email already in use'] },
+        { referralCode: registerDTO.email }
+      );
     }
 
     const passwordHash = await this.passwordHasher.hashPassword(registerDTO.password);
@@ -31,7 +36,6 @@ export class authService {
     const createdUser = await this.authRepo.createCredential({
       email: registerDTO.email,
       passwordHash: passwordHash,
-      // createdAt: registerDTO.createdAt,
     });
 
     return {
@@ -43,8 +47,12 @@ export class authService {
   async login(dto: loginDto) {
     const credential = await this.authRepo.findCredentialByEmail(dto.email);
     if (!credential) {
-      throw new Error('Invalid credentials');
+      throw new AuthCredentialsError(
+        { email: ['Invalid email or password'] },
+        { email: dto.email }
+      );
     }
+
 
     const isPasswordValid = await this.passwordHasher.comparePassword(dto.password, credential.passwordHash);
     if (!isPasswordValid) {
@@ -60,6 +68,7 @@ export class authService {
     };
 
   }
+
 
   // async refresh (context: ExecutionContext) {
   //   const req : Context.switchToHttp().getRequest();
