@@ -13,4 +13,7 @@ export class Material {
 
   @Column('decimal')
   price: number; // ex: 19.99
+
+  @Column('int', { default: 1000 })
+  weightGrams: number; // ex: 1000g
 }

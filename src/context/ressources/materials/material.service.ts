@@ -1,5 +1,5 @@
 
-import { Injectable } from '@nestjs/common';
+import { Injectable, ConflictException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Material } from './entities/material.entity';
@@ -13,6 +13,16 @@ export class MaterialService {
   ) { }
 
   async create(createMaterialDto: CreateMaterialDto): Promise<Material> {
+    // Vérifie s'il existe déjà un matériel avec le même brand et type
+    const existing = await this.materialRepository.findOne({
+      where: {
+        brand: createMaterialDto.brand,
+        type: createMaterialDto.type,
+      },
+    });
+    if (existing) {
+      throw new ConflictException('A material with the same brand and type already exists');
+    }
     const material = this.materialRepository.create(createMaterialDto);
     return this.materialRepository.save(material);
   }
