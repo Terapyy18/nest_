@@ -32,3 +32,6 @@ Routes API (découverte)
 Support rapide
 - Démarrer Redis (Windows) si besoin :
   - via WSL/Docker ou exécutable redis-server.exe
+
+
+Vous trouverez un export .nest.sql de la base de donnée
