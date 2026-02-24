@@ -1,7 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany, OneToOne } from 'typeorm';
 
-@Entity()
-export class Material {
+@Entity('rsc_material')
+export class RscMaterial {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 

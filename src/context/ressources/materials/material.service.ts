@@ -2,17 +2,17 @@
 import { Injectable, ConflictException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Material } from './entities/material.entity';
+import { RscMaterial } from './entities/material.entity';
 import { CreateMaterialDto } from './types/material.dto';
 
 @Injectable()
 export class MaterialService {
   constructor(
-    @InjectRepository(Material)
-    private readonly materialRepository: Repository<Material>
+    @InjectRepository(RscMaterial)
+    private readonly materialRepository: Repository<RscMaterial>
   ) { }
 
-  async create(createMaterialDto: CreateMaterialDto): Promise<Material> {
+  async create(createMaterialDto: CreateMaterialDto): Promise<RscMaterial> {
     // Vérifie s'il existe déjà un matériel avec le même brand et type
     const existing = await this.materialRepository.findOne({
       where: {
@@ -27,15 +27,15 @@ export class MaterialService {
     return this.materialRepository.save(material);
   }
 
-  async findAll(): Promise<Material[]> {
+  async findAll(): Promise<RscMaterial[]> {
     return this.materialRepository.find();
   }
 
-  async findOne(id: string): Promise<Material | null> {
+  async findOne(id: string): Promise<RscMaterial | null> {
     return this.materialRepository.findOne({ where: { id } });
   }
 
-  async update(id: string, data: Partial<Material>): Promise<Material | null> {
+  async update(id: string, data: Partial<RscMaterial>): Promise<RscMaterial | null> {
     await this.materialRepository.update(id, data);
     return this.findOne(id);
   }

@@ -1,26 +1,26 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
-import { Printer } from "./entities/Printer.entity";
+import { RscPrinter } from "./entities/printer.entity";
 
 @Injectable()
 export class PrinterRepository {
     constructor(
-        @InjectRepository(Printer)
-        private readonly printerRepository: Repository<Printer>
-    ) {}
+        @InjectRepository(RscPrinter)
+        private readonly printerRepository: Repository<RscPrinter>
+    ) { }
 
 
-    async findById(id: string): Promise<Printer | null> {
+    async findById(id: string): Promise<RscPrinter | null> {
         return this.printerRepository.findOne({ where: { id } });
     }
 
-    async findAll(): Promise<Printer[]> {
+    async findAll(): Promise<RscPrinter[]> {
         return this.printerRepository.find();
     }
 
     // Example: find by brand
-    async findByBrand(brand: string): Promise<Printer[] | null> {
+    async findByBrand(brand: string): Promise<RscPrinter[] | null> {
         return this.printerRepository.find({ where: { brand } });
     }
 }

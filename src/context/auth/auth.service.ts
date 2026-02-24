@@ -113,9 +113,6 @@ export class authService {
 
 
   async logout() {
-    // Dans une implémentation JWT stateless, le logout se fait côté client (suppression du token).
-    // Si on veut invalider le token côté serveur, il faudrait une base de données Redis pour une liste noire (blacklist).
-    // Pour l'instant, on retourne juste un succès.
     return { message: 'Logged out successfully' };
   }
 }

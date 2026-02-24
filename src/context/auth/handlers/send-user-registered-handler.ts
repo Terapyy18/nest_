@@ -17,9 +17,9 @@ export class SendUserRegisteredHandler {
                 const info = await this.mailService.sendMail({
                     from: process.env.MAILER_EMAIL,
                     to: payload.email,
-                    subject: "Welcome" + payload.email,
-                    text: "Welcome to our platform",
-                    html: "<b>Welcome to our platform</b>",
+                    subject: "Bienvenue" + payload.email,
+                    text: "Bienvenue sur Manufactur3D",
+                    html: "<b>Bienvenue sur Manufactur3D</b>",
                 });
 
                 console.log("Message sent: %s", info.messageId);

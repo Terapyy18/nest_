@@ -1,8 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
-
-@Entity()
-export class Printer {
+@Entity('rsc_printer')
+export class RscPrinter {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -15,4 +14,9 @@ export class Printer {
   @Column('decimal')
   powerConsumptionWatts: number;
 
+  @Column('decimal', { precision: 10, scale: 2, default: 0 })
+  acquisitionCost: number;
+
+  @Column('decimal', { precision: 10, scale: 2, default: 0.5 })
+  maintenanceHourlyCost: number;
 }

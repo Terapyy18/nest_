@@ -1,23 +1,23 @@
 import { Injectable, NotFoundException, ConflictException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Printer } from './entities/Printer.entity';
+import { RscPrinter } from './entities/printer.entity';
 import { CreatePrinterDto } from './types/printer.dto';
 export class PrinterService {
 	constructor(
-		@InjectRepository(Printer)
-		private readonly printerRepository: Repository<Printer>,
+		@InjectRepository(RscPrinter)
+		private readonly printerRepository: Repository<RscPrinter>,
 	) { }
 
-	async findAll(): Promise<Printer[]> {
+	async findAll(): Promise<RscPrinter[]> {
 		return this.printerRepository.find();
 	}
 
-	async findById(id: string): Promise<Printer | null> {
+	async findById(id: string): Promise<RscPrinter | null> {
 		return this.printerRepository.findOne({ where: { id } });
 	}
 
-	async create(createDto: CreatePrinterDto): Promise<Printer> {
+	async create(createDto: CreatePrinterDto): Promise<RscPrinter> {
 		// Vérifie s'il existe déjà une imprimante avec le même brand et model
 		const existing = await this.printerRepository.findOne({
 			where: {
@@ -31,7 +31,7 @@ export class PrinterService {
 		const printer = this.printerRepository.create(createDto);
 		return this.printerRepository.save(printer);
 	}
-	async update(id: string, data: Partial<CreatePrinterDto>): Promise<Printer | null> {
+	async update(id: string, data: Partial<CreatePrinterDto>): Promise<RscPrinter | null> {
 		await this.printerRepository.update(id, data);
 		return this.findById(id);
 	}

@@ -1,4 +1,4 @@
-import { DomainError } from "src/core/errors/domain.errors";
+import { DomainError } from "../../core/errors/domain.errors";
 import { loginDto } from "../auth.types";
 
 

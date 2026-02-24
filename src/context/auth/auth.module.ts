@@ -33,6 +33,10 @@ import { PermissionsGuard } from './guards/permissions.guard';
     { provide: AUTH_REPOSITORY, useClass: authRepository },
     { provide: IPasswordHasher, useClass: passwordHasherService },
   ],
-  exports: [],
+  exports: [
+    JwtAuthGuard,
+    PermissionsGuard,
+    JwtStrategy,
+  ],
 })
 export class authModule { }

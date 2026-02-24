@@ -1,0 +1,21 @@
+{
+  "info": {
+    "_postman_id": "304effd6-7d0c-4b2e-9274-a7bd479b9e4d",
+    "name": "New Collection",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Recuperer les shipping-profiles",
+      "id": "a379ccac-b896-4cd7-b85f-4a975dc40f01",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": ""
+        }
+      },
+      "response": []
+    }
+  ]
+}
